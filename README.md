@@ -32,9 +32,7 @@ Personalization Renderer
 - Vanilla JavaScript
 
 ## Architecture Diagram
-
-![Lifecycle Architecture](docs/architecture-diagram.png)
-
+![Lifecycle Architecture](architecture-diagram.png)
 
 ## Why This Matters
 
