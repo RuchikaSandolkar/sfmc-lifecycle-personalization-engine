@@ -34,6 +34,24 @@ Personalization Renderer
 ## Architecture Diagram
 ![Lifecycle Architecture](architecture-diagram.png)
 
+## Key Design Decisions
+
+1. Suppression logic is evaluated before behavioral logic to ensure compliance priority.
+2. Journey exit logic executes before incentive calculation to prevent redundant messaging.
+3. Discount calculation is abstracted into a dedicated function for scalability.
+4. Rendering logic is separated from business logic to mimic enterprise architecture layering.
+
+## Mapping to Salesforce Marketing Cloud
+
+Simulation Component → SFMC Equivalent
+
+Contact Object → Contact Builder Attributes  
+Suppression Flag → Global Suppression Data Extension  
+Recent Purchase Flag → Journey Exit Decision Split  
+Discount Engine → SQL Segmentation Logic  
+Greeting Logic → Dynamic Content Rules  
+renderEmail() → Journey Send Activity  
+
 ## Why This Matters
 
 In enterprise Salesforce Marketing Cloud environments,
