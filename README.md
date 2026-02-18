@@ -31,6 +31,11 @@ Personalization Renderer
 - CSS
 - Vanilla JavaScript
 
+## Architecture Diagram
+
+![Lifecycle Architecture](docs/architecture-diagram.png)
+
+
 ## Why This Matters
 
 In enterprise Salesforce Marketing Cloud environments,
