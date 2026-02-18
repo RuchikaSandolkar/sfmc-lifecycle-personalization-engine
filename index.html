@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>SFMC Abandoned Cart – Enterprise Simulation</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        padding: 20px;
+      }
+
+      .email-container {
+        max-width: 600px;
+        background: white;
+        margin: auto;
+        padding: 20px;
+        border-radius: 6px;
+      }
+
+      .product {
+        border-top: 1px solid #ddd;
+        padding: 15px 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .product img {
+        width: 100px;
+        margin-right: 15px;
+      }
+
+      .btn {
+        display: inline-block;
+        padding: 12px 20px;
+        background: black;
+        color: white;
+        text-decoration: none;
+        margin-top: 20px;
+        border-radius: 4px;
+      }
+
+      .discount {
+        color: red;
+        font-weight: bold;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="email-container" id="email"></div>
+
+    <script>
+      /*
+Enterprise Abandoned Cart Simulation
+Simulates:
+- Contact Builder attributes
+- Journey exit logic
+- Suppression framework
+- Loyalty-based discounting
+- Multi-language personalization
+*/
+
+      console.log("SFMC Simulation Running");
+
+      function renderEmail() {
+        const contact = {
+          firstName: "Ruchika",
+          loyaltyStatus: "Gold", // Change to Gold to test
+          cartValue: 50, // Change value to test discount
+          recentPurchase: false, // Change to true to simulate journey exit
+          isSuppressed: false, // Change to true to simulate global suppression
+          language: "en", // Try "de"
+        };
+
+        const cartItems = [
+          {
+            productName: "Leather Handbag",
+            price: 120,
+            image: "https://via.placeholder.com/100",
+          },
+          {
+            productName: "Summer Dress",
+            price: 100,
+            image: "https://via.placeholder.com/100",
+          },
+        ];
+
+        // 1️⃣ Global Suppression Logic
+        if (contact.isSuppressed === true) {
+          document.getElementById("email").innerHTML =
+            "<h2>This contact is globally suppressed.</h2>";
+          return;
+        }
+
+        // 2️⃣ Journey Exit Logic
+        if (contact.recentPurchase === true) {
+          document.getElementById("email").innerHTML = `
+      <h2>Thank you for your recent purchase, ${contact.firstName}!</h2>
+      <p>No need to complete your cart.</p>
+    `;
+          return;
+        }
+
+        const greeting = getGreeting(contact.language);
+        const discountPercent = getDiscount(contact);
+        const hoursLeft = getUrgency();
+
+        let emailHTML = `
+    <h2>${greeting} ${contact.firstName},</h2>
+    <p>You left these items in your cart:</p>
+  `;
+
+        emailHTML += renderCart(cartItems);
+
+        emailHTML += `
+    <p class="discount">
+      You get ${discountPercent}% OFF if you complete your purchase in the next ${hoursLeft} hours!
+    </p>
+    <a href="#" class="btn">Complete Purchase</a>
+  `;
+
+        document.getElementById("email").innerHTML = emailHTML;
+      }
+
+      // 🔹 Business Logic Functions
+
+      function getDiscount(contact) {
+        if (contact.loyaltyStatus === "Gold") return 20;
+        if (contact.cartValue > 200) return 15;
+        return 10;
+      }
+
+      function getGreeting(language) {
+        if (language === "de") return "Hallo";
+        if (language === "fr") return "Bonjour";
+        return "Hi";
+      }
+
+      function getUrgency() {
+        return Math.floor(Math.random() * 12) + 1;
+      }
+
+      function renderCart(cartItems) {
+        if (cartItems.length === 0) {
+          return "<p>Your cart is currently empty.</p>";
+        }
+
+        let cartHTML = "";
+
+        cartItems.forEach((item) => {
+          cartHTML += `
+      <div class="product">
+        <img src="${item.image}">
+        <div>
+          <strong>${item.productName}</strong><br>
+          €${item.price}
+        </div>
+      </div>
+    `;
+        });
+
+        return cartHTML;
+      }
+
+      // 🔹 Execute Simulation
+      renderEmail();
+    </script>
+  </body>
+</html>
