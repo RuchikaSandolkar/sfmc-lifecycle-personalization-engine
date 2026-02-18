@@ -24,7 +24,7 @@ Discount Engine
 Personalization Renderer  
 
 ## Live Demo
-(Insert your GitHub Pages link here)
+(https://github.com/RuchikaSandolkar)
 
 ## Technical Stack
 - HTML
